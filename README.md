@@ -1,6 +1,4 @@
-# 22g_flask_travel_journal
-
-## Nama Aplikasi
+# Nama Aplikasi
 Sistem Flask Journal
 
 ## Kegunaan Aplikasi
