@@ -8,6 +8,7 @@ Aplikasi "Travel Journal" ini adalah sebuah aplikasi web yang dirancang untuk me
 
 ## Flowchart
 Berikut adalah flowchart yang menggambarkan alur kerja aplikasi:
+
 <img src="screenshoots/Flowchart.png" alt="Flowchart Aplikasi" width="500">
 
 ## Perkenalan Tim
