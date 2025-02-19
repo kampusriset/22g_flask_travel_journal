@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Journal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a class="nav-brand" href="{{ url_for('travel_controller.dashboard') }}">
+                <i class="fas fa-plane-departure"></i> Travel Journal
+            </a>
+            <div class="nav-right">
+                <a href="{{ url_for('travel_controller.dashboard') }}" class="button button-secondary">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+                <a href="{{ url_for('travel_controller.create') }}" class="button button-primary">
+                    <i class="fas fa-plus"></i> Tambah Catatan
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <h1 class="page-title"><i class="fas fa-list"></i> Daftar Perjalanan</h1>
+<div class="search-container">
+    <form action="{{ url_for('travel_controller.index') }}" method="GET" class="search-form">
+        <div class="search-input-group">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" 
+                       name="search" 
+                       value="{{ search }}" 
+                       placeholder="Cari tempat atau deskripsi..."
+                       class="search-input">
+            </div>
+            <div class="search-buttons">
+                <button type="submit" class="button button-primary button-compact">
+                    Cari
+                </button>
+                {% if search %}
+                    <a href="{{ url_for('travel_controller.index') }}" 
+                       class="button button-secondary button-compact">
+                        Reset
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+</div>
+        {% if search %}
+            <div class="search-results">
+                <p>Ditemukan {{ total_items }} hasil untuk pencarian "{{ search }}"</p>
+            </div>
+        {% endif %}
+        <div class="grid">
+            {% for travel in travels %}
+            <div class="card">
+                <div class="card-content">
+                    <h3 class="card-title"><i class="fas fa-map-marker-alt"></i> {{ travel[1] }}</h3>
+                    <p class="card-text"><i class="fas fa-quote-left"></i> {{ travel[2] }}</p>
+                    <div class="rating-display">
+                        {% for i in range(5) %}
+                            {% if i < (travel[5] or 0) %}
+                                <i class="fas fa-star"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="date"><i class="far fa-calendar-alt"></i> {{ travel[3].strftime('%d %B %Y') }}</p>
+                    <p class="cost"><i class="fas fa-money-bill-wave"></i> Rp {{ "{:,.2f}".format(travel[4]).replace(',', '.') }}</p>
+                    <div class="card-actions">
+                        <a href="{{ url_for('travel_controller.update', travel_id=travel[0]) }}" 
+                           class="button button-warning">
+                           <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="{{ url_for('travel_controller.delete', travel_id=travel[0]) }}" 
+                              method="POST" 
+                              onsubmit="return confirmDelete(event)">
+                            <button type="submit" class="button button-danger">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if total_pages > 1 %}
+        <div class="pagination">
+            {% if current_page > 1 %}
+                <a href="{{ url_for('travel_controller.index', page=1, search=search) }}" 
+                   class="button button-secondary button-page">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="{{ url_for('travel_controller.index', page=current_page-1, search=search) }}" 
+                   class="button button-secondary button-page">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            {% endif %}
+
+            {% for page_num in page_range %}
+                <a href="{{ url_for('travel_controller.index', page=page_num, search=search) }}" 
+                   class="button {% if page_num == current_page %}button-primary{% else %}button-secondary{% endif %} button-page">
+                    {{ page_num }}
+                </a>
+            {% endfor %}
+            
+            {% if current_page < total_pages %}
+                <a href="{{ url_for('travel_controller.index', page=current_page+1, search=search) }}" 
+                   class="button button-secondary button-page">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="{{ url_for('travel_controller.index', page=total_pages, search=search) }}" 
+                   class="button button-secondary button-page">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </main>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Catatan perjalanan ini akan dihapus permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#A68B7C',
+                cancelButtonColor: '#B67162',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                background: '#E3D5CA',
+                color: '#4A3933'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit();
+                }
+            });
+            return false;
+        }
+    </script>
+</body>
+</html>

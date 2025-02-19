@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Catatan Perjalanan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a class="nav-brand" href="{{ url_for('travel_controller.index') }}">
+                <i class="fas fa-plane-departure"></i> Travel Journal
+            </a>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="form-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plus-circle"></i> Tambah Catatan Perjalanan Baru</h2>
+                </div>
+                <div class="card-content">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="place_name"><i class="fas fa-map-marker-alt"></i> Nama Tempat</label>
+                            <input type="text" id="place_name" name="place_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description"><i class="fas fa-comment-alt"></i> Deskripsi Pengalaman</label>
+                            <textarea id="description" name="description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="travel_date"><i class="far fa-calendar-alt"></i> Tanggal Perjalanan</label>
+                            <input type="date" id="travel_date" name="travel_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cost"><i class="fas fa-money-bill-wave"></i> Biaya (Rp)</label>
+                            <input type="number" id="cost" name="cost" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-star"></i> Rating Pengalaman</label>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5">
+                                <label for="star5" title="5 stars"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="4 stars"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3" checked>
+                                <label for="star3" title="3 stars"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="2 stars"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="1 star"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="button button-primary">
+                                <i class="fas fa-save"></i> Simpan
+                            </button>
+                            <a href="{{ url_for('travel_controller.index') }}" class="button button-secondary">
+                                <i class="fas fa-arrow-left"></i> Kembali
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
