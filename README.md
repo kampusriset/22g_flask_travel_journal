@@ -8,7 +8,7 @@ Aplikasi "Travel Journal" ini adalah sebuah aplikasi web yang dirancang untuk me
 
 ## Flowchart
 Berikut adalah flowchart yang menggambarkan alur kerja aplikasi:
-screenshoots/Flowchart.png
+![Tampilan Aplikasi](screenshoots/Flowchart.png)
 
 ## Perkenalan Tim
 - Ezar Ramadhan - [Implementasi login, register, logout, dan reset password pada controllers.py, Menampilkan statistik perjalanan di dashboard pada controllers.py, dan Implementasi model pengguna untuk autentikasi pada models.py]
