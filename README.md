@@ -15,4 +15,4 @@ Berikut adalah flowchart yang menggambarkan alur kerja aplikasi:
 - Syakara Akbar - [Membuat dan mengatur tampilan halaman untuk fitur-fitur yang ada, dan Menambahkan dan mengatur gaya CSS untuk tampilan halaman]
 
 ## Link Video Dokumentasi
-Anda dapat menonton video dokumentasi aplikasi melalui tautan berikut: [Judul Video](https://youtu.be/V1Maru6MDeE)
+Anda dapat menonton video dokumentasi aplikasi melalui tautan berikut: [Klik Disini](https://youtu.be/V1Maru6MDeE)
